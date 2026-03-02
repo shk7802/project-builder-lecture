@@ -7,6 +7,17 @@
     --background-color: #f0f2f5;
     --text-color: #333;
     --white: #fff;
+    --container-bg: #fff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --background-color: #1a1a1a;
+    --text-color: #f0f2f5;
+    --white: #2d2d2d;
+    --container-bg: #2d2d2d;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --secondary-color: #ffca28;
 }
 
 * {
@@ -22,15 +33,42 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: var(--background-color);
-    background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
+    position: relative;
     text-align: center;
-    padding: 2rem;
-    background-color: var(--white);
+    padding: 3rem 2rem 2rem;
+    background-color: var(--container-bg);
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 h1 {
