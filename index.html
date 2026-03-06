@@ -1,105 +1,129 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotto Number Generator</title>
+    <title>로또 번호 생성기 - 무료 자동 번호 추출 및 통계 정보</title>
+    <meta name="description" content="무료로 로또 번호를 생성하고 최신 통계 및 분석 정보를 확인하세요. 사용자 최적화된 로또 번호 자동 추출 도구입니다.">
     <meta name="google-adsense-account" content="ca-pub-7704656895024724">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7704656895024724"
          crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-            🌓
-        </button>
-        <h1>Lotto Number Generator</h1>
-        <div class="lotto-numbers" id="lotto-container">
-            <div class="lotto-row">
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
+    <header>
+        <nav class="navbar">
+            <div class="logo">LottoGen</div>
+            <ul class="nav-links">
+                <li><a href="#generator">번호 생성</a></li>
+                <li><a href="#guide">이용 가이드</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+                <li><a href="#partnership">제휴 문의</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌓</button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- 메인 생성기 섹션 -->
+        <section id="generator" class="main-section">
+            <h1>로또 번호 생성기</h1>
+            <p class="subtitle">고급 알고리즘을 활용한 무작위 번호 생성</p>
+            
+            <div class="lotto-numbers" id="lotto-container">
+                <div class="lotto-row">
+                    <span class="number">?</span><span class="number">?</span><span class="number">?</span><span class="number">?</span><span class="number">?</span><span class="number">?</span>
+                </div>
+                <div class="lotto-row">
+                    <span class="number">?</span><span class="number">?</span><span class="number">?</span><span class="number">?</span><span class="number">?</span><span class="number">?</span>
+                </div>
             </div>
-            <div class="lotto-row">
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
+            
+            <div class="action-area">
+                <button id="generator-btn" class="primary-btn">새 번호 생성하기</button>
             </div>
-            <div class="lotto-row">
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
+        </section>
+
+        <!-- 콘텐츠 보강 섹션: 이용 가이드 -->
+        <section id="guide" class="info-section">
+            <h2>로또 번호 생성기 이용 가이드</h2>
+            <div class="content-box">
+                <p>본 로또 번호 생성기는 1부터 45까지의 숫자 중 중복되지 않는 6개의 숫자를 무작위로 추출합니다. 구글의 권장 사항에 따라 사용자에게 최적화된 인터페이스를 제공하며, 모든 번호 생성은 클라이언트 측에서 안전하게 이루어집니다.</p>
+                <h3>번호 생성 원리</h3>
+                <p>저희 알고리즘은 <strong>Fisher-Yates 셔플 알고리즘</strong>을 기반으로 하여, 각 숫자가 선택될 확률을 동일하게 유지합니다. 이는 통계적으로 가장 공정한 무작위 추출 방식 중 하나입니다.</p>
+                <ul>
+                    <li>완전 무작위성 보장</li>
+                    <li>중복 번호 배제</li>
+                    <li>오름차순 자동 정렬로 가독성 향상</li>
+                </ul>
             </div>
-            <div class="lotto-row">
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
+        </section>
+
+        <!-- 콘텐츠 보강 섹션: FAQ -->
+        <section id="faq" class="info-section">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <div class="accordion">
+                <div class="faq-item">
+                    <h4>Q: 번호 생성 서비스는 무료인가요?</h4>
+                    <p>A: 네, 본 사이트에서 제공하는 모든 로또 번호 생성 기능은 100% 무료로 운영됩니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Q: 생성된 번호로 당첨될 확률은 얼마나 되나요?</h4>
+                    <p>A: 로또 6/45의 1등 당첨 확률은 약 814만 분의 1입니다. 생성기는 무작위 추출 도구일 뿐 당첨을 보장하지는 않습니다.</p>
+                </div>
             </div>
-            <div class="lotto-row">
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-                <span class="number"></span>
-            </div>
-        </div>
-        <button id="generator-btn">Generate Numbers</button>
+        </section>
 
         <hr class="divider">
 
-        <div class="partnership-section">
-            <h2>Partnership Inquiry</h2>
+        <!-- 제휴 문의 -->
+        <section id="partnership" class="partnership-section">
+            <h2>제휴 및 문의</h2>
             <form action="https://formspree.io/f/meelwbyq" method="POST" class="partnership-form">
                 <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="text" name="name" placeholder="성함" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="email" name="email" placeholder="이메일 주소" required>
                 </div>
                 <div class="form-group">
-                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <textarea name="message" placeholder="문의 내용을 입력하세요" required></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Send Inquiry</button>
+                <button type="submit" class="submit-btn">문의 보내기</button>
             </form>
-        </div>
+        </section>
 
         <hr class="divider">
 
-        <div id="disqus_thread"></div>
-        <script>
-            /**
-            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-            /*
-            var disqus_config = function () {
-            this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = window.location.pathname; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-            */
-            (function() { // DON'T EDIT BELOW THIS LINE
+        <!-- 댓글 섹션 -->
+        <section class="comment-section">
+            <h3>사용자 의견</h3>
+            <div id="disqus_thread"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 LottoGen. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="/privacy.html">개인정보처리방침</a>
+                <a href="/terms.html">이용약관</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = window.location.pathname;
+        };
+        (function() {
             var d = document, s = d.createElement('script');
             s.src = 'https://productbuilder-czlndgkj96.disqus.com/embed.js';
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-    <script src="main.js"></script>
+        })();
+    </script>
 </body>
 </html>
