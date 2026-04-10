@@ -1,14 +1,48 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또 번호 생성기</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <div class="container">
+        <h1>로또 번호 생성기</h1>
+        <div class="numbers">
+            <span class="number">?</span>
+            <span class="number">?</span>
+            <span class="number">?</span>
+            <span class="number">?</span>
+            <span class="number">?</span>
+            <span class="number">?</span>
+        </div>
+        <button id="generate">번호 생성</button>
+    </div>
+
+    <div class="container partnership-section">
+        <h2>🤝 제휴 문의</h2>
+        <p>함께 성장할 파트너를 찾습니다. 제휴 관련 내용을 남겨주세요.</p>
+        <form action="https://formspree.io/f/xeepbgrk" method="POST" id="partnership-form">
+            <div class="form-group">
+                <label for="name">성함 / 담당자명</label>
+                <input type="text" id="name" name="name" required placeholder="홍길동">
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="_replyto" required placeholder="example@email.com">
+            </div>
+            <div class="form-group">
+                <label for="company">회사명 / 소속</label>
+                <input type="text" id="company" name="company" placeholder="회사명을 입력해주세요">
+            </div>
+            <div class="form-group">
+                <label for="message">제휴 문의 내용</label>
+                <textarea id="message" name="message" rows="5" required placeholder="제휴하고 싶은 내용이나 제안을 상세히 적어주세요."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">제휴 신청하기</button>
+        </form>
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>
