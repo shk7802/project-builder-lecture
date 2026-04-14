@@ -130,3 +130,7 @@ h1, h2 {
 .submit-btn:hover {
     background: #357abd;
 }
+
+.comments-section {
+    text-align: left;
+}
