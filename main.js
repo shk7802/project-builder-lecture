@@ -14,6 +14,7 @@ const retryBtn = document.getElementById('retry');
 
 // Load the model
 async function initModel() {
+    if (model) return;
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
     model = await tmImage.load(modelURL, metadataURL);
@@ -44,52 +45,101 @@ function setupLabels() {
 initModel();
 
 // Image Upload Logic
+uploadArea.addEventListener('click', () => imageUpload.click());
 triggerUpload.addEventListener('click', () => imageUpload.click());
 
-imageUpload.addEventListener('change', async (e) => {
-    if (e.target.files.length > 0) {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        
-        loading.style.display = 'block';
-        uploadArea.style.display = 'none';
-        webcamSection.style.display = 'none';
-        
-        reader.onload = async (event) => {
-            const img = new Image();
-            img.src = event.target.result;
-            img.onload = async () => {
-                await predict(img);
-                loading.style.display = 'none';
-                resultArea.style.display = 'block';
-            };
-        };
-        reader.readAsDataURL(file);
+uploadArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadArea.style.backgroundColor = "#eef2f7";
+    uploadArea.style.borderColor = "var(--primary-color)";
+});
+
+uploadArea.addEventListener('dragleave', () => {
+    uploadArea.style.backgroundColor = "transparent";
+    uploadArea.style.borderColor = "var(--border-color)";
+});
+
+uploadArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadArea.style.backgroundColor = "transparent";
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        handleImageUpload(files[0]);
     }
 });
+
+imageUpload.addEventListener('change', (e) => {
+    if (e.target.files.length > 0) {
+        handleImageUpload(e.target.files[0]);
+    }
+});
+
+async function handleImageUpload(file) {
+    if (!file.type.startsWith('image/')) {
+        alert('이미지 파일만 업로드 가능합니다.');
+        return;
+    }
+
+    const reader = new FileReader();
+    loading.style.display = 'block';
+    uploadArea.style.display = 'none';
+    webcamSection.style.display = 'none';
+    resultArea.style.display = 'none';
+    
+    reader.onload = async (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = async () => {
+            // 업로드한 이미지를 화면에 잠시 보여주기 위한 캔버스 생성 (선택 사항)
+            const container = document.getElementById("webcam-container");
+            container.innerHTML = '';
+            img.style.maxWidth = '100%';
+            img.style.borderRadius = '15px';
+            container.appendChild(img);
+            webcamSection.style.display = 'block';
+
+            await predict(img);
+            loading.style.display = 'none';
+            resultArea.style.display = 'block';
+        };
+    };
+    reader.readAsDataURL(file);
+}
 
 // Webcam Logic
 startWebcamBtn.addEventListener('click', async () => {
     loading.style.display = 'block';
     uploadArea.style.display = 'none';
+    resultArea.style.display = 'none';
     
-    const flip = true;
-    webcam = new tmImage.Webcam(300, 300, flip);
-    await webcam.setup();
-    await webcam.play();
-    
-    loading.style.display = 'none';
-    webcamSection.style.display = 'block';
-    document.getElementById("webcam-container").appendChild(webcam.canvas);
-    
-    window.requestAnimationFrame(loop);
+    try {
+        const flip = true;
+        webcam = new tmImage.Webcam(300, 300, flip);
+        await webcam.setup();
+        await webcam.play();
+        
+        loading.style.display = 'none';
+        webcamSection.style.display = 'block';
+        const container = document.getElementById("webcam-container");
+        container.innerHTML = '';
+        container.appendChild(webcam.canvas);
+        
+        window.requestAnimationFrame(loop);
+    } catch (e) {
+        console.error(e);
+        alert('웹캠을 시작할 수 없습니다. 권한을 확인해주세요.');
+        loading.style.display = 'none';
+        uploadArea.style.display = 'block';
+    }
 });
 
 async function loop() {
-    webcam.update();
-    await predict(webcam.canvas);
-    if (webcamSection.style.display !== 'none') {
-        window.requestAnimationFrame(loop);
+    if (webcam && webcam.canvas) {
+        webcam.update();
+        await predict(webcam.canvas);
+        if (webcamSection.style.display !== 'none') {
+            window.requestAnimationFrame(loop);
+        }
     }
 }
 
@@ -107,12 +157,14 @@ async function predict(input) {
         const probPercent = (prob * 100).toFixed(0) + "%";
         
         const wrapper = labelContainer.childNodes[i];
-        wrapper.querySelector('.class-name').innerText = classTitle;
-        wrapper.querySelector('.probability').innerText = probPercent;
-        
-        const bar = wrapper.querySelector('.bar-fill');
-        bar.style.width = probPercent;
-        bar.className = `bar-fill bar-${classTitle.toLowerCase()}`;
+        if (wrapper) {
+            wrapper.querySelector('.class-name').innerText = classTitle;
+            wrapper.querySelector('.probability').innerText = probPercent;
+            
+            const bar = wrapper.querySelector('.bar-fill');
+            bar.style.width = probPercent;
+            bar.className = `bar-fill bar-${classTitle.toLowerCase()}`;
+        }
 
         if (prob > topProb) {
             topProb = prob;
@@ -121,7 +173,6 @@ async function predict(input) {
     }
 
     updateResultMessage(topClass);
-    resultArea.style.display = 'block';
 }
 
 function updateResultMessage(className) {
@@ -144,20 +195,22 @@ retryBtn.addEventListener('click', () => {
 const generateLottoBtn = document.getElementById('generate-lotto');
 const lottoNumbersContainer = document.getElementById('lotto-numbers');
 
-generateLottoBtn.addEventListener('click', () => {
-    const numbers = new Set();
-    while (numbers.size < 6) {
-        const randomNumber = Math.floor(Math.random() * 45) + 1;
-        numbers.add(randomNumber);
-    }
+if (generateLottoBtn) {
+    generateLottoBtn.addEventListener('click', () => {
+        const numbers = new Set();
+        while (numbers.size < 6) {
+            const randomNumber = Math.floor(Math.random() * 45) + 1;
+            numbers.add(randomNumber);
+        }
 
-    const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
-    
-    lottoNumbersContainer.innerHTML = '';
-    sortedNumbers.forEach(num => {
-        const span = document.createElement('span');
-        span.className = 'number';
-        span.textContent = num;
-        lottoNumbersContainer.appendChild(span);
+        const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
+        
+        lottoNumbersContainer.innerHTML = '';
+        sortedNumbers.forEach(num => {
+            const span = document.createElement('span');
+            span.className = 'number';
+            span.textContent = num;
+            lottoNumbersContainer.appendChild(span);
+        });
     });
-});
+}
