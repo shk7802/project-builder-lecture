@@ -139,3 +139,25 @@ function updateResultMessage(className) {
 retryBtn.addEventListener('click', () => {
     location.reload();
 });
+
+// Lotto Generation Logic
+const generateLottoBtn = document.getElementById('generate-lotto');
+const lottoNumbersContainer = document.getElementById('lotto-numbers');
+
+generateLottoBtn.addEventListener('click', () => {
+    const numbers = new Set();
+    while (numbers.size < 6) {
+        const randomNumber = Math.floor(Math.random() * 45) + 1;
+        numbers.add(randomNumber);
+    }
+
+    const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
+    
+    lottoNumbersContainer.innerHTML = '';
+    sortedNumbers.forEach(num => {
+        const span = document.createElement('span');
+        span.className = 'number';
+        span.textContent = num;
+        lottoNumbersContainer.appendChild(span);
+    });
+});

@@ -133,6 +133,33 @@ h1 {
     border-radius: 12px;
 }
 
+/* Lotto Styles */
+.numbers {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.number {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.number:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
 /* Form Styles */
 .partnership-section { text-align: left; }
 .form-group { margin-bottom: 20px; }
