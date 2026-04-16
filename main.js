@@ -114,7 +114,7 @@ startWebcamBtn.addEventListener('click', async () => {
     
     try {
         const flip = true;
-        webcam = new tmImage.Webcam(300, 300, flip);
+        webcam = new tmImage.Webcam(500, 500, flip);
         await webcam.setup();
         await webcam.play();
         

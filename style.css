@@ -28,18 +28,19 @@ body {
     border-radius: 24px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     text-align: center;
     margin-bottom: 30px;
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 10px;
     color: var(--primary-color);
 }
 
 .subtitle {
+    font-size: 1.1rem;
     color: var(--text-muted);
     margin-bottom: 30px;
 }
@@ -49,18 +50,27 @@ h1 {
     background: #fafbfc;
     border: 2px dashed var(--border-color);
     border-radius: 20px;
-    padding: 40px 20px;
+    padding: 30px;
     transition: all 0.3s ease;
 }
 
 .upload-area {
     cursor: pointer;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .upload-icon {
-    font-size: 3rem;
+    font-size: 5rem;
     color: var(--secondary-color);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.upload-area p {
+    font-size: 1.2rem;
 }
 
 .webcam-section video, .webcam-section canvas {
